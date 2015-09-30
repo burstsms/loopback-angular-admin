@@ -1,0 +1,71 @@
+{
+  /**
+   * This is a sample configuration file for PM2
+   */
+
+  /**
+   * Here we declare the apps that must be managed by PM2
+   * All options are listed here:
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration
+   *
+   */
+  apps : [
+    {
+      name      : "loopback-angular-admin",
+      script    : "server/server.js",
+      exec_mode : 'cluster',
+      instances : '2',
+      env: {
+        NODE_ENV: "development"
+      },
+      env_staging: {
+        NODE_ENV: "staging"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    },
+  ],
+
+
+  /**
+   * PM2 help you to deploy apps over your servers
+   * For more help go to :
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+   */
+  deploy : {
+    production : {
+      user : "admin",
+      host : ["live2.7ap.me"],
+      ref  : "origin/master",
+      repo : "git@bitbucket.org:burstsms/loopback-angular-admin.git",
+      path : "/home/admin/deploy/pm2/production/loopback-angular-admin",
+      "post-deploy" : "npm install && /usr/local/node/node-default/bin/bower install && /usr/local/node/node-default/bin/grunt build && /usr/local/node/node-default/bin/pm2 startOrRestart ecosystem.json5 --env production",
+      env  : {
+        NODE_ENV: "production"
+      }
+    },
+    staging : {
+      user : "admin",
+      host : ["stage.7ap.me"],
+      ref  : "origin/develop",
+      repo : "git@bitbucket.org:burstsms/loopback-angular-admin.git",
+      path : "/home/admin/deploy/pm2/staging/loopback-angular-admin",
+      "post-deploy" : "npm install && /usr/local/node/node-default/bin/bower install && /usr/local/node/node-default/bin/grunt build && /usr/local/node/node-default/bin/pm2 startOrRestart ecosystem.json5 --env staging",
+      env  : {
+        NODE_ENV: "staging"
+      }
+    },
+    dev : {
+      user : "admin",
+      host : ["nodedev.local"],
+      ref  : "origin/develop",
+      repo : "git@bitbucket.org:burstsms/loopback-angular-admin.git",
+      path : "/home/admin/deploy/pm2/develop/loopback-angular-admin",
+      "post-deploy" : "npm install && /usr/local/node/node-default/bin/bower install && /usr/local/node/node-default/bin/grunt build && /usr/local/node/node-default/bin/pm2 startOrRestart ecosystem.json5 --env develop",
+      env  : {
+        NODE_ENV: "develop"
+      }
+    }
+  }
+}

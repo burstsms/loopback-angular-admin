@@ -1,0 +1,23 @@
+{
+  "local": {
+    "provider": "local",
+    "module": "passport-local",
+    "usernameField": "username",
+    "passwordField": "password",
+    "authPath": "/auth/local",
+    "successRedirect": "/auth/account",
+    "failureRedirect": "/local"
+  },
+  "google-login": {
+    "provider": "google",
+    "module": "passport-google-oauth",
+    "strategy": "OAuth2Strategy",
+    "clientID": "512429918472-79hih5j7v62gtfb4hv4bvs9ipm3rj6ul.apps.googleusercontent.com",
+    "clientSecret": "BijAW7my0LZ5Q_WJV_txZcjk",
+    "callbackURL": "http://nodestage.burstage.com:3000/auth/google/callback",
+    "authPath": "/auth/google",
+    "callbackPath": "/auth/google/callback",
+    "successRedirect": "/auth/account",
+    "scope": ["email", "profile"]
+  }
+}
