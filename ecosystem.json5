@@ -48,7 +48,7 @@
     staging : {
       user : "admin",
       host : ["stage.7ap.me"],
-      ref  : "origin/develop",
+      ref  : "origin/master",
       repo : "git@github.com:burstsms/loopback-angular-admin.git",
       path : "/home/admin/deploy/pm2/staging/loopback-angular-admin",
       "post-deploy" : "npm install && /usr/local/node/node-default/bin/bower install && /usr/local/node/node-default/bin/grunt build && /usr/local/node/node-default/bin/pm2 startOrRestart ecosystem.json5 --env staging",
@@ -59,7 +59,7 @@
     dev : {
       user : "admin",
       host : ["nodedev.local"],
-      ref  : "origin/develop",
+      ref  : "origin/master",
       repo : "git@github.com:burstsms/loopback-angular-admin.git",
       path : "/home/admin/deploy/pm2/develop/loopback-angular-admin",
       "post-deploy" : "npm install && /usr/local/node/node-default/bin/bower install && /usr/local/node/node-default/bin/grunt build && /usr/local/node/node-default/bin/pm2 startOrRestart ecosystem.json5 --env develop",
